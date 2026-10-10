@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="no-referrer" name="referrer"/>
+<meta content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com; img-src 'self' blob: data:; frame-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'self'" http-equiv="Content-Security-Policy"/>
+<title>AulaTeX UCM 5 · Escritura académica accesible</title>
+<meta content="Editor académico LaTeX y Markdown: GitHub Pages + Actions, temas personalizables y guardado por versiones." name="description"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="app/style.css" rel="stylesheet"/>
+<script defer="" src="vendor/jszip.min.js"></script>
+<script src="app/app.mjs" type="module"></script>
+</head>
+<body>
+<a class="skip" href="#editor">Saltar al editor</a>
+<header class="topbar">
+<div class="identity"><img alt="Universidad Complutense de Madrid" class="header-ucm" height="67" src="assets/ucm-logo.png" width="189"/><div><h1>AulaTeX <span>UCM</span></h1><p>LaTeX / Markdown</p></div></div>
+<div class="connection"><span class="badge" id="mode">DEMO LOCAL</span><span id="account">Sin conectar a GitHub</span></div>
+<nav aria-label="Sesión y ayuda"><button aria-controls="project-sidebar" aria-expanded="true" id="sidebar-toggle">Archivos</button><button aria-haspopup="dialog" id="theme" title="Tema, colores, tipografía y accesibilidad">Apariencia</button><a class="button subtle" href="guia.html" rel="noopener" target="_blank">Guía</a><button class="primary" id="connect">Conectar GitHub</button><button hidden="" id="disconnect">Cerrar sesión</button></nav>
+</header>
+<div class="workspacebar">
+<div class="workspace-title"><span class="eyebrow">ESPACIO DE TRABAJO</span><strong id="workspace-name">Espacio local · sin publicar</strong></div>
+<div class="work-actions"><button data-lock="" disabled="" id="reload" title="Volver a leer el repositorio">Recibir cambios</button><button data-lock="" id="new-project">Nuevo proyecto</button><button data-lock="" id="import-project">Importar ZIP</button></div>
+</div>
+<main class="layout" id="layout">
+<aside aria-label="Proyectos y archivos" class="sidebar" id="project-sidebar">
+<div class="side-section"><label for="project-select">Proyecto</label><select data-lock="" id="project-select"><option value="bienvenida">bienvenida</option></select><div class="tiny" id="branch-info">Ejemplo local · no se envía nada</div></div><nav aria-label="Herramientas del proyecto" class="side-section project-actions"><button data-lock="" disabled="" id="share">Compartir</button><button data-lock="" id="bibliography">Bibliografía</button><button aria-expanded="false" disabled="" id="chat-toggle">Chat</button><button data-lock="" disabled="" id="reviews">Comentarios</button></nav>
+<div class="side-section files-section"><div class="section-heading"><h2>Archivos</h2><span class="count" id="file-count"></span></div><label class="sr-only" for="file-filter">Filtrar archivos</label><input id="file-filter" placeholder="Buscar archivo…" type="search"/><div class="file-tools"><button data-lock="" id="add-file">+ Archivo</button><button data-lock="" id="upload-files">Subir</button><input hidden="" id="files-input" multiple="" type="file"/></div><nav aria-label="Archivos del proyecto" id="file-list"></nav></div>
+<div class="side-section outline-section"><h2>Estructura del archivo</h2><nav aria-label="Estructura del documento" id="outline"></nav></div>
+<div class="side-bottom"><button id="markdown-example">Probar Markdown</button><button data-lock="" disabled="" id="history">Historial en GitHub</button><button data-lock="" id="export-project">Exportar proyecto ZIP</button><div class="institution"><img alt="Universidad Complutense de Madrid" id="ucm-logo" referrerpolicy="no-referrer" src="assets/ucm-logo.png"/><span><strong>Pages + Actions · v5</strong></span></div><p class="legal"><strong>Fork creado por la Oficina de Software Libre y Tecnologías Abiertas</strong><br/><a href="guia.html#procedencia" rel="noopener" target="_blank">Acerca de esta versión</a></p></div>
+</aside>
+<section aria-label="Edición y resultado" class="workarea">
+<div class="documentbar"><div><h2 id="project-title">Bienvenida a AulaTeX UCM</h2><p id="save-state">Ejemplo: los cambios solo están en esta pestaña.</p></div><div class="doc-actions"><button class="save-button" data-lock="" id="save">Guardar ZIP</button><button aria-haspopup="dialog" id="force-save" title="Guardar ahora; revisa antes cualquier sustitución">Forzar guardado</button><button class="primary" data-lock="" disabled="" id="compile">Compilar</button></div></div>
+<div class="collaborationbar"><span class="badge" id="access-mode">Ejemplo local</span><button disabled="" id="sync-now">Sincronizar ahora</button><label class="check"><input disabled="" id="auto-sync" type="checkbox"/> Guardar automáticamente (60 s)</label><span id="sync-status" role="status">Recepción de cambios cada 30 s cuando conectes GitHub.</span><button class="danger" hidden="" id="resolve-conflicts">Resolver conflictos</button></div>
+<div class="settingsbar"><label>Principal <select data-lock="" id="main-file"></select></label><label>Motor <select data-lock="" id="engine"><option value="pdflatex">pdfLaTeX</option><option value="xelatex">XeLaTeX</option><option value="lualatex">LuaLaTeX</option><option value="markdown">Markdown · local</option></select></label><span class="engine-note">TeX Live 2026 · Actions</span><div aria-label="Distribución" class="segmented" role="group"><button aria-pressed="true" id="view-both">Dividida</button><button aria-pressed="false" id="view-code">Código</button><button aria-pressed="false" id="view-pdf">PDF</button></div><label class="split-label" for="split-size">Anchura código<input aria-label="Porcentaje de anchura del código" id="split-size" max="70" min="30" type="range" value="50"/></label></div>
+<div class="editor-grid" id="editor-grid">
+<section aria-label="Código fuente" class="codepanel">
+<div class="panelbar"><strong id="filename">main.tex</strong><span aria-label="Estado de cambios" id="file-modified"></span><button class="small" data-lock="" id="rename-file">Renombrar</button><button class="small danger" data-lock="" id="delete-file">Eliminar</button></div>
+<div class="editor-tools"><button aria-expanded="false" class="small" id="find-toggle">Buscar / sustituir</button><label class="small">Texto <select id="font-size"><option>16</option><option selected="">18</option><option>20</option><option>24</option><option>28</option><option>32</option><option>36</option><option>40</option></select></label><label class="small check"><input id="plain-editor" type="checkbox"/> Sin colores</label><button aria-pressed="false" class="small" id="focus-mode">Más espacio</button><button class="small" data-lock="" id="insert-section">+ Sección</button></div>
+<div class="findbar" hidden="" id="findbar"><label>Buscar<input id="find-text" type="text"/></label><label>Sustituir<input id="replace-text" type="text"/></label><button id="find-next">Siguiente</button><button data-lock="" id="replace-one">Uno</button><button data-lock="" id="replace-all">Todos</button><button aria-label="Cerrar búsqueda" id="close-find">×</button></div>
+<div class="editor-shell" id="editor-shell"><pre aria-hidden="true" id="gutter">1</pre><div class="source-stack"><pre aria-hidden="true" id="highlight"></pre><textarea aria-describedby="editor-help" aria-label="Código fuente LaTeX" autocapitalize="off" autocomplete="off" autocorrect="off" id="editor" spellcheck="false" wrap="off"></textarea></div></div>
+<div hidden="" id="binary-panel"><p id="binary-info"></p><button id="download-file">Guardar este archivo</button></div>
+<div class="codefooter"><span id="cursor">Línea 1 · columna 1</span><span id="word-count"></span><span id="editor-help">Ctrl+S guardar · Ctrl+Shift+S forzar · Esc, Tab salir</span></div>
+</section>
+<section aria-label="Vista previa y diagnóstico" class="previewpanel">
+<div class="panelbar"><strong id="preview-label">Vista previa</strong><span class="badge muted" id="pdf-status">EJEMPLO</span><button class="small" disabled="" id="open-pdf">Abrir PDF</button><button class="small" disabled="" id="download-pdf">Guardar PDF</button></div>
+<div class="preview-notice" id="preview-notice">PDF de ejemplo precompilado. Conecta tu repositorio para generar el tuyo.</div><div hidden="" id="markdown-tools"><button id="markdown-download">Descargar .md</button><button id="markdown-export">Exportar HTML</button><button id="markdown-print">Imprimir / PDF</button><span id="markdown-hint">Vista local</span></div>
+<div id="preview-content"><article aria-label="Documento Markdown renderizado" class="markdown-body" hidden="" id="markdown-panel" tabindex="0"></article><img alt="Vista del documento de ejemplo, compilado previamente con LaTeX. No refleja las ediciones de esta pestaña." id="demo-preview" src="assets/demo.png"/><iframe hidden="" id="pdf-frame" referrerpolicy="no-referrer" title="PDF compilado con LaTeX"></iframe><div class="empty" hidden="" id="pdf-empty"><strong>Tu próximo PDF empieza aquí.</strong><p>Guarda el proyecto y pulsa Compilar. El código no sale de tu repositorio hacia un servidor propio.</p></div></div>
+<details id="logs"><summary>Diagnóstico de compilación <span id="log-indicator"></span></summary><div class="log-actions"><a hidden="" id="run-link" rel="noopener" target="_blank">Ver ejecución en GitHub Actions</a><button hidden="" id="stop-wait">Dejar de esperar</button></div><pre id="log-text">No se ha solicitado ninguna compilación.</pre></details>
+</section>
+</div>
+<div class="recoverybar"><label class="check"><input id="local-drafts" type="checkbox"/> Guardar borradores de este repositorio en el ordenador</label><button class="small" id="clear-drafts">Borrar copias locales</button><span>El token solo vive en memoria. Cierra sesión al terminar.</span></div>
+</section>
+<aside aria-labelledby="chat-title" class="chat-drawer" hidden="" id="chat-drawer">
+<div class="dialog-heading"><div><span class="eyebrow">EQUIPO DEL PROYECTO</span><h2 id="chat-title">Chat</h2></div><button aria-label="Cerrar chat" id="chat-close">×</button></div>
+<p class="tiny">Mensajes compartidos mediante GitHub Issues. Todos los que tengan acceso al repositorio podrán leerlos. GitHub puede enviar notificaciones. No es mensajería instantánea ni un canal privado personal.</p>
+<div class="chat-tools"><button id="chat-refresh">Actualizar</button><button disabled="" id="chat-older">Anteriores</button><button id="chat-export">Exportar cargados</button><a hidden="" id="chat-link" rel="noopener" target="_blank">Ver en GitHub</a></div>
+<div aria-label="Mensajes de la conversación" class="chat-messages" id="chat-messages"></div>
+<p class="tiny" id="chat-reply"></p><button hidden="" id="chat-cancel-reply">Cancelar respuesta / edición</button>
+<label for="chat-input">Mensaje · @usuario para mencionar</label><textarea id="chat-input" maxlength="8000" placeholder="Escribe al equipo…" rows="4"></textarea>
+<label class="check tiny"><input id="chat-context" type="checkbox"/> Adjuntar archivo y revisión actuales</label>
+<button class="primary" id="chat-send">Enviar mensaje</button><p aria-live="polite" id="chat-status" role="status">Conecta GitHub para abrir la conversación.</p>
+</aside></main>
+<div aria-live="polite" class="statusbar" id="status" role="status">Listo. Explora el ejemplo o conecta tu GitHub.</div>
+<dialog aria-labelledby="connection-title" id="connection-dialog">
+<div class="dialog-heading"><h2 id="connection-title">Tu GitHub, tu espacio</h2><button aria-label="Cerrar conexión" data-close="connection-dialog">×</button></div>
+<p>Cada persona utiliza <strong>su propio token</strong>. Para propietario o miembro de organización: token fine-grained limitado al repositorio con <strong>Contents RW + Actions RW</strong> (e <strong>Issues RW</strong> para comentarios y chat). Para leer bastan permisos de lectura. Los colaboradores externos pueden necesitar un <strong>token classic con ámbito repo</strong>, más amplio: consulta la guía y la política de la organización. No introduzcas tu contraseña de GitHub.</p>
+<label for="token">Token de GitHub</label><input autocomplete="off" id="token" placeholder="github_pat_…" spellcheck="false" type="password"/><button class="primary" id="auth-button">1. Comprobar token y listar repositorios</button>
+<p id="auth-status" role="status"></p>
+<label for="repo-select">Repositorios accesibles</label><select id="repo-select"><option value="">Conecta primero</option></select>
+<label for="repo-input">Propietario / repositorio de documentos</label><input autocomplete="off" id="repo-input" placeholder="Blai3ePascal/aulatex-proyectos" spellcheck="false"/>
+<label for="branch-input">Rama (vacío = predeterminada)</label><input autocomplete="off" id="branch-input" placeholder="main" spellcheck="false"/>
+<p class="callout">El repositorio debe contener la plantilla <code>repo-proyectos</code> del paquete. <strong>Un repositorio por proyecto o grupo con idénticos permisos.</strong> Compartir concede acceso a todas sus carpetas. Nunca pegues un token de otra persona, una clave privada de GitHub App ni tu contraseña.</p>
+<button class="primary" id="open-repo">2. Abrir espacio de trabajo</button><p class="tiny">El token no se guarda en cookies, localStorage, IndexedDB, URLs ni archivos. Un token funciona como una llave: úsalo solo en una copia del editor que controles y revises.</p>
+</dialog>
+<dialog aria-labelledby="new-title" id="new-dialog"><div class="dialog-heading"><h2 id="new-title">Nuevo proyecto</h2><button aria-label="Cerrar nuevo proyecto" data-close="new-dialog">×</button></div><label for="new-slug">Identificador de carpeta</label><input id="new-slug" maxlength="64" placeholder="mi-articulo"/><label for="new-name">Título del proyecto</label><input id="new-name" maxlength="160" placeholder="Mi artículo"/><label for="new-template">Plantilla inicial</label><select id="new-template"></select><p>Se creará en memoria. Pulsa <strong>Guardar en GitHub</strong> para subirlo; sin conexión puedes exportarlo como ZIP.</p><button class="primary" id="create-project">Crear proyecto</button></dialog>
+<dialog aria-labelledby="import-title" id="import-dialog"><div class="dialog-heading"><h2 id="import-title">Importar un proyecto LaTeX</h2><button aria-label="Cerrar importación" data-close="import-dialog">×</button></div><p>Selecciona el ZIP exportado desde Overleaf o una carpeta LaTeX comprimida. No subas un repositorio completo con <code>.git</code>. Límite: 30 MiB comprimidos, 80 MiB extraídos y 500 archivos.</p><label for="zip-file">Archivo ZIP</label><input accept=".zip,application/zip" id="zip-file" type="file"/><label for="import-slug">Identificador del nuevo proyecto</label><input id="import-slug" maxlength="64" placeholder="articulo-importado"/><label for="import-name">Título</label><input id="import-name" maxlength="160" placeholder="Artículo importado"/><button class="primary" id="do-import">Importar en el editor</button></dialog>
+<dialog aria-labelledby="history-title" id="history-dialog"><div class="dialog-heading"><h2 id="history-title">Versiones guardadas</h2><button aria-label="Cerrar historial" data-close="history-dialog">×</button></div><p>El historial corresponde a las versiones guardadas en GitHub, no a cada pulsación. Las restauraciones se realizan desde GitHub o importando un ZIP anterior.</p><div id="history-list"></div><hr/><label for="restore-sha">Recuperar una revisión como nueva edición (SHA completo de 40 caracteres)</label><input id="restore-sha" placeholder="Copia el identificador completo desde GitHub"/><button id="restore-version">Recuperar sin borrar el historial</button></dialog>
+<noscript>Este editor necesita JavaScript para leer y guardar archivos. La guía de instalación funciona sin JavaScript.</noscript>
+<dialog aria-labelledby="share-title" id="share-dialog">
+<div class="dialog-heading"><h2 id="share-title">Compartir proyecto</h2><button aria-label="Cerrar compartir" data-close="share-dialog">×</button></div>
+<p class="callout" id="share-warning"></p>
+<p><strong>El enlace no concede permisos.</strong> Primero invita a la persona. Después acepta la invitación y entra con su propio token. El modo «ver» es una comodidad de la interfaz, no una restricción de seguridad.</p>
+<label for="link-mode">Abrir enlace en modo</label><select id="link-mode"><option value="edit">Edición (si GitHub lo permite)</option><option value="view">Solo ver en esta interfaz</option></select>
+<label for="share-link">Enlace al proyecto, sin credenciales</label><input id="share-link" readonly=""/><button id="copy-link">Copiar enlace</button>
+<hr/><h3>Invitar desde aquí</h3>
+<label for="invite-user">Usuario de GitHub</label><input autocomplete="off" id="invite-user" placeholder="usuario-github"/>
+<label for="invite-role">Permiso real que concederá GitHub</label><select id="invite-role"><option value="push">Puede editar</option><option value="pull">Puede leer (organizaciones)</option></select>
+<label for="admin-token">Token del administrador, opcional y solo para esta operación</label><input autocomplete="off" id="admin-token" placeholder="Administration RW, si tu token normal no lo tiene" type="password"/>
+<p class="tiny">No se guarda. Debes ser administrador del repositorio. No necesitas ampliar el token diario de edición: también puedes invitar en la página de GitHub.</p>
+<div class="dialog-actions"><button class="primary" id="send-invite">Enviar invitación</button><button class="danger" id="revoke-user">Retirar acceso directo</button><a id="github-access" rel="noopener" target="_blank">Gestionar en GitHub</a></div>
+<p id="invite-status" role="status"></p><button id="list-collaborators">Consultar colaboradores</button><div id="collaborator-list"></div>
+</dialog>
+<dialog aria-labelledby="conflict-title" class="wide-dialog" id="conflicts-dialog">
+<div class="dialog-heading"><h2 id="conflict-title">Conservamos las dos versiones</h2><button aria-label="Cerrar resolución sin descartar" data-close="conflicts-dialog">×</button></div>
+<p>La sincronización está pausada. No se ha sobrescrito GitHub. Compara, elige una versión o escribe una combinación. Las zonas compatibles ya se han combinado.</p>
+<label for="conflict-file">Archivo que necesita revisión</label><select id="conflict-file"></select><p class="callout" id="conflict-reason"></p>
+<details><summary>Versión común de partida</summary><textarea aria-label="Versión de partida" id="conflict-base" readonly=""></textarea></details>
+<div class="conflict-grid"><label>Tu versión<textarea id="conflict-local" readonly=""></textarea><button id="download-local">Guardar copia local</button></label><label>Versión recibida de GitHub<textarea id="conflict-remote" readonly=""></textarea><button id="download-remote">Guardar copia remota</button></label></div>
+<label for="conflict-output">Combinación manual (para archivos de texto)</label><textarea id="conflict-output" spellcheck="false"></textarea>
+<div class="dialog-actions"><button id="resolve-local">Conservar mi versión</button><button id="resolve-remote">Conservar la de GitHub</button><button class="primary" id="resolve-manual">Utilizar mi combinación</button></div>
+<p class="tiny">Una versión eliminada significa borrar el archivo. Después de resolver todos los conflictos, pulsa Guardar. Para combinar dos binarios, descarga ambos y sustituye el archivo manualmente.</p>
+</dialog>
+<dialog aria-labelledby="reviews-title" id="reviews-dialog">
+<div class="dialog-heading"><h2 id="reviews-title">Comentarios y tareas</h2><button aria-label="Cerrar comentarios" data-close="reviews-dialog">×</button></div>
+<p>Se guardan como <strong>Issues de GitHub</strong>, vinculadas al proyecto. No son anotaciones móviles sobre el PDF. La selección y la línea se refieren a la revisión indicada.</p>
+<p id="review-file"></p><label for="review-title">Título</label><input id="review-title" maxlength="120"/><label for="review-body">Comentario</label><textarea id="review-body" maxlength="12000" rows="6"></textarea>
+<button class="primary" id="send-review">Enviar comentario</button><button id="load-reviews">Leer comentarios existentes</button><p id="review-status" role="status"></p><div id="reviews-list"></div>
+</dialog>
+<dialog aria-labelledby="bib-title" class="wide-dialog bib-dialog" id="bibliography-dialog">
+<div class="dialog-heading"><div><span class="eyebrow">REFERENCIAS DEL PROYECTO</span><h2 id="bib-title">Bibliografía</h2></div><button aria-label="Cerrar bibliografía" data-close="bibliography-dialog">×</button></div>
+<p>Importa, revisa y cita. Tus archivos <code>.bib</code> siguen siendo la fuente de verdad. Nada se añade ni publica sin confirmación.</p>
+<div class="bib-columns">
+<section><h3>1. Traer referencias</h3><label for="bib-file">Desde Zotero, un gestor o una web</label><input accept=".bib,.ris,.json,.txt" id="bib-file" multiple="" type="file"/>
+<p class="tiny">BibTeX / BibLaTeX, RIS y CSL JSON. En Zotero: Exportar colección → BibLaTeX o CSL JSON. No hace falta una cuenta Zotero.</p>
+<label for="bib-paste">O pega datos bibliográficos</label><textarea id="bib-paste" maxlength="5242880" placeholder='@article{...} · TY  - JOUR · [{"title": ...}]' rows="5" spellcheck="false"></textarea>
+<button id="bib-parse">Revisar importación</button><a class="button subtle" href="capturador.html" rel="noopener" target="_blank">Capturar una página abierta</a>
+<details><summary>Resolver DOI, arXiv, PMID, ISBN o URL con Actions</summary>
+<label for="bib-queries">Una dirección o identificador por línea (máximo 20)</label><textarea id="bib-queries" placeholder="10.1038/nphys1170
+arxiv:1706.03762
+pmid:31452104
+isbn:9780262046305
+https://…" rows="4"></textarea>
+<p class="tiny">Actions consulta las fuentes públicas. No envíes enlaces con tokens, credenciales o datos privados. Las páginas pueden bloquear al robot; el capturador o una exportación RIS/BibTeX son la alternativa. No se ejecuta JavaScript remoto.</p>
+<button id="bib-fetch">Solicitar metadatos</button><label for="bib-request-id">Identificador de solicitud (para recuperarla después)</label><input id="bib-request-id" maxlength="80"/><button id="bib-check">Consultar resultado</button><a hidden="" id="bib-run-link" rel="noopener" target="_blank">Ver importaciones en Actions</a>
+</details>
+<h3>2. Revisar antes de añadir</h3><div class="section-heading"><strong id="bib-staged-count">Sin importación pendiente</strong><label class="check"><input checked="" id="bib-select-all" type="checkbox"/> Seleccionar todas</label></div>
+<div class="bib-list" id="bib-staged"></div>
+<details id="bib-edit-box"><summary>Editar la ficha seleccionada como BibTeX</summary><textarea aria-label="BibTeX de la referencia seleccionada" id="bib-entry-editor" rows="8" spellcheck="false"></textarea><button id="bib-update-entry">Aplicar edición a la ficha</button></details>
+<label for="bib-target">Archivo de destino (.bib)</label><input id="bib-target" list="bib-target-list" value="references.bib"/><datalist id="bib-target-list"></datalist>
+<button class="primary" id="bib-add">Añadir seleccionadas al proyecto</button>
+</section>
+<section><h3>3. Citar desde tu biblioteca</h3><label for="bib-search">Buscar por título, autor, año, clave o DOI</label><input id="bib-search" placeholder="Busca una referencia…" type="search"/><p class="tiny" id="bib-library-count"></p><div class="bib-list library-list" id="bib-library"></div>
+<label for="bib-style">Estilo para documentos nuevos</label><select id="bib-style"><option value="numeric">Numérico</option><option value="authoryear">Autor y año</option><option value="apa">APA</option><option value="ieee">IEEE</option></select><button id="bib-setup">Preparar bibliografía en el principal</button>
+<p class="tiny">Añade biblatex, la ruta al .bib y printbibliography. No cambia un estilo ya configurado ni convierte automáticamente documentos con natbib/BibTeX. Guarda y compila para ver las citas.</p>
+</section></div><p aria-live="polite" class="callout" id="bib-status" role="status">Importación local: todavía no se ha modificado ningún archivo.</p>
+</dialog>
+<dialog aria-labelledby="appearance-title" class="wide-dialog" id="appearance-dialog">
+<div class="dialog-heading"><div><span class="eyebrow">PREFERENCIAS LOCALES</span><h2 id="appearance-title">Apariencia y lectura</h2></div><button aria-label="Cancelar los ajustes de apariencia" data-close="appearance-dialog">×</button></div>
+<p>Los cambios se previsualizan aquí. Pulsa Guardar apariencia para recordarlos en este navegador; cerrar o Escape cancela. El logo permanece intacto.</p>
+<label for="appearance-preset">Tema</label><select id="appearance-preset"></select>
+<div class="appearance-grid"><fieldset><legend>Colores</legend>
+<label for="appearance-background">Fondo de trabajo</label><input id="appearance-background" type="color"/>
+<label for="appearance-surface">Paneles y documento</label><input id="appearance-surface" type="color"/>
+<label for="appearance-text">Texto</label><input id="appearance-text" type="color"/>
+<label for="appearance-accent">Acento de botones</label><input id="appearance-accent" type="color"/>
+<p class="tiny" id="appearance-contrast" role="status"></p></fieldset>
+<fieldset><legend>Tipografía y distribución</legend>
+<label for="appearance-uiSize">Texto de la interfaz (14–24 px)</label><input id="appearance-uiSize" max="24" min="14" step="1" type="number"/>
+<label for="appearance-editorSize">Código (16–40 px)</label><input id="appearance-editorSize" max="40" min="16" step="1" type="number"/>
+<label for="appearance-readingSize">Lectura Markdown (16–30 px)</label><input id="appearance-readingSize" max="30" min="16" step="1" type="number"/>
+<label for="appearance-lineHeight">Interlineado del código (1,35–2)</label><input id="appearance-lineHeight" max="2" min="1.35" step="0.05" type="number"/>
+<label for="appearance-sidebar">Anchura de archivos (190–350 px)</label><input id="appearance-sidebar" max="350" min="190" type="range"/>
+<label for="appearance-split">Anchura del código (30–70 %)</label><input id="appearance-split" max="70" min="30" type="range"/>
+<label class="check"><input id="appearance-serif" type="checkbox"/> Tipografía con serifas en la lectura</label>
+<label class="check"><input id="appearance-wrap" type="checkbox"/> Ajustar líneas largas (sin coloreado ni margen numerado)</label>
+<label class="check"><input id="appearance-largeTargets" type="checkbox"/> Controles amplios de 44 px</label></fieldset></div>
+<div class="dialog-actions"><button class="primary" id="appearance-save">Guardar apariencia</button><button id="appearance-reset">Restablecer UCM claro</button><button id="appearance-export">Exportar ajustes</button><button data-close="appearance-dialog">Cancelar</button></div>
+<label for="appearance-import">Importar ajustes JSON</label><input accept=".json,application/json" id="appearance-import" type="file"/>
+<p class="tiny">Inspiración funcional: paneles de tu captura y tonos neutros de un tablero. Estos temas no son una copia de Lichess. No es una certificación completa WCAG.</p>
+</dialog>
+<dialog aria-labelledby="force-title" id="force-dialog">
+<div class="dialog-heading"><h2 id="force-title">Forzar guardado</h2><button aria-label="Cancelar guardado forzado" data-close="force-dialog">×</button></div>
+<p class="callout" id="force-summary"></p><p id="force-status" role="alert"></p>
+<p>Se creará una revisión nueva a partir de la versión de GitHub que acabamos de leer. Nunca se hace <code>force-push</code>. Los cambios compatibles se combinan; los archivos ajenos a este proyecto no se tocan.</p>
+<ul class="force-files" id="force-files"></ul>
+<p class="force-warning" hidden="" id="force-warning"></p>
+<label for="force-confirm-text" hidden="" id="force-confirm-label">Escribe GUARDAR para confirmar la preferencia de tu versión en los archivos indicados</label><input autocomplete="off" hidden="" id="force-confirm-text"/>
+<div class="dialog-actions"><button id="force-local-zip">Copia ZIP de mi edición</button><button id="force-remote-zip">Copia ZIP de GitHub</button></div>
+<div class="dialog-actions"><button class="primary" id="force-confirm">Guardar esta revisión ahora</button><button data-close="force-dialog">Cancelar</button></div>
+<p class="tiny">Si alguien guarda mientras revisas este diálogo, se detiene la operación y tendrás que volver a revisarla. El botón no omite permisos ni reglas de GitHub.</p>
+</dialog></body>
+</html>

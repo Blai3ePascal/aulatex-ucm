@@ -1,0 +1,6 @@
+// Opt-in local recovery. Never stores credentials. Each workspace has its own key.
+function db(){return new Promise((resolve,reject)=>{const r=indexedDB.open('aulatex-drafts-v1',1);r.onupgradeneeded=()=>r.result.createObjectStore('drafts');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+export async function draftGet(key){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction('drafts','readonly'),r=tx.objectStore('drafts').get(key);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);tx.oncomplete=()=>d.close();});}
+export async function draftPut(key,value){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction('drafts','readwrite');tx.objectStore('drafts').put(value,key);tx.oncomplete=()=>{d.close();resolve();};tx.onerror=()=>{d.close();reject(tx.error);};});}
+export async function draftRemove(key){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction('drafts','readwrite');tx.objectStore('drafts').delete(key);tx.oncomplete=()=>{d.close();resolve();};tx.onerror=()=>reject(tx.error);});}
+export async function draftsClear(){const d=await db();return new Promise((resolve,reject)=>{const tx=d.transaction('drafts','readwrite');tx.objectStore('drafts').clear();tx.oncomplete=()=>{d.close();resolve();};tx.onerror=()=>reject(tx.error);});}

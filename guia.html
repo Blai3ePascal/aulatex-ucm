@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>Un escritorio para LaTeX y Markdown</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1e1e1e;background:#f6f5f4;font:20px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}header,main,footer{max-width:1100px;margin:auto;padding:30px 42px}header{background:#fff;border-top:10px solid #b71234}header img{display:block;max-width:189px;width:189px;height:auto}header .kicker{color:#b71234;letter-spacing:1.5px;font-size:14px;font-weight:800;margin-top:24px}h1{line-height:1.16;font-size:44px;letter-spacing:-1px}h2{font-size:30px;border-bottom:2px solid #b71234;padding-bottom:12px;margin-top:52px;line-height:1.35}h3{font-size:24px;line-height:1.4;margin-top:34px}main{background:#fff}footer{font-size:15px;border-top:2px solid #b71234;background:#fff}a{color:#99112c;text-decoration-thickness:2px;text-underline-offset:3px}a:focus-visible{outline:3px solid #1e1e1e;outline-offset:4px}p,li{overflow-wrap:anywhere}code{font:17px/1.55 ui-monospace,Consolas,monospace;background:#f3f3f3;padding:2px 5px;border-radius:2px;overflow-wrap:anywhere}pre{padding:20px;border-left:5px solid #b71234;background:#f5f5f5;white-space:pre-wrap;overflow-wrap:anywhere}pre code{padding:0;background:transparent}table{width:100%;border-collapse:collapse;font-size:17px;line-height:1.5;margin:28px 0}td,th{padding:13px;text-align:left;vertical-align:top;border:1px solid #d8d8d8;overflow-wrap:anywhere}th{background:#f9e9ed}blockquote,.notice{border-left:5px solid #b71234;padding:18px 24px;margin:24px 0;background:#fff2f5}.toc{padding:20px 26px;border:1px solid #ddd;border-radius:2px;background:#fafafa}.toc a{display:block;margin:10px 0}.chapter{scroll-margin-top:20px}.button{display:inline-block;padding:13px 22px;background:#b71234;color:#fff;border-radius:2px;text-decoration:none;font-weight:700}.credit{font-size:19px;line-height:1.55}.small{font-size:16px;color:#555}@media(max-width:700px){body{font-size:18px}header,main,footer{padding:24px 20px}h1{font-size:34px}h2{font-size:26px}h3{font-size:22px}table{font-size:14px}td,th{padding:8px}pre{padding:14px}code{font-size:15px}}@media print{body{background:#fff;font-size:11pt}header,main,footer{max-width:none;padding:0}h1{font-size:27pt}h2{font-size:19pt}h3{font-size:15pt}pre,code,table{font-size:9pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}.toc{display:none}a{color:#1e1e1e}}</style></head><body><header><img src="data:image/png;base64,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" alt="Universidad Complutense de Madrid" width="189" height="67"><p class="kicker">AULATEX UCM · VERSIÓN 5</p><h1>Un escritorio para LaTeX y Markdown</h1><p class="credit">Fork creado por la Oficina de Software Libre y Tecnologías Abiertas</p><p class="small">Pages + Actions · Entrega del 10 de octubre de 2026</p></header><main><div class="notice"><strong>Antes de comenzar.</strong> El paquete está probado localmente; no está desplegado por haber generado estos archivos. Las pruebas con GitHub y proveedores bibliográficos usan respuestas simuladas. La guía distingue las pruebas locales de la aceptación pendiente en tu cuenta.</div><nav class="toc" aria-label="Contenido de la guía"><strong>Contenido</strong><a href="#instalacion">Primera instalación y uso</a><a href="#bibliografia">Bibliografía: traer, revisar y citar</a><a href="#chat">Chat y privacidad del equipo</a><a href="#pruebas">Pruebas y aceptación pendiente</a><a href="#procedencia">Procedencia, crédito y cambios</a><a href="#fuentes">Fuentes y licencias</a></nav><section class="chapter" id="instalacion"><h2>Primera instalación y uso</h2><p><strong>Fork creado por la Oficina de Software Libre y Tecnologías Abiertas</strong></p>
+<p>Esta entrega es completa. No necesitas instalar las versiones anteriores ni subir primero la v4. El editor, el gestor de bibliografía, el chat y las herramientas de publicación están incluidos. No se ha creado ni actualizado ningún repositorio de tu cuenta desde esta conversación.</p>
+<h2 id="instalacion-1-probarlo-antes-de-publicar-nada">1. Probarlo antes de publicar nada</h2>
+<p>Descomprime el ZIP completo en una carpeta. En Windows ejecuta <strong>ABRIR_EDITOR.bat</strong>, o abre PowerShell en esa carpeta y escribe:</p>
+<pre><code class="language-powershell">python tools/vista_local.py
+</code></pre>
+<p>Necesitas Python 3.10 o posterior para esta vista local. Se abrirá <code>http://127.0.0.1:8765/</code> en tu navegador; deja la terminal abierta. Si el puerto está ocupado, utiliza <code>python tools/vista_local.py --port 8766</code>. Ctrl+C detiene la vista. No abras <code>repo-web/index.html</code> haciendo doble clic: los módulos y el trabajador de Markdown necesitan HTTP(S).</p>
+<p>La vista local sirve únicamente los archivos públicos del editor, en tu propio equipo. No expone el repositorio de documentos ni abre un servicio accesible por la red. Es una herramienta opcional para probar el paquete, <strong>no un servidor adicional exigido por la instalación en GitHub</strong>. En producción siguen utilizándose Pages, repositorios/API de GitHub y Actions.</p>
+<p>Puedes cambiar el diseño, escribir Markdown y exportar archivos sin conectar una cuenta. El PDF LaTeX inicial es un ejemplo precompilado: no representa tus cambios. Para compilar LaTeX con la arquitectura incluida necesitas publicar el repositorio de documentos y conectar GitHub. <strong>Sin GitHub, guarda tu trabajo en ZIP antes de cerrar: la edición del ejemplo permanece en la pestaña, no en un disco sincronizado.</strong></p>
+<h2 id="instalacion-2-la-nueva-distribucion">2. La nueva distribución</h2>
+<p>Archivos y herramientas de proyecto a la izquierda; código y lectura/PDF en el centro; conversación del equipo en un panel lateral cuando abres Chat. En pantallas estrechas, los paneles se apilan y el botón <strong>Archivos</strong> despliega la navegación.</p>
+<p>El diseño utiliza bordes rectos, esquinas de 0–2 píxeles, separadores finos y controles con texto. No hay tarjetas flotantes, degradados decorativos ni burbujas de chat. El título y la lectura académica pueden usar serifas; el código sigue en una fuente monoespaciada del sistema. El paquete no incluye fuentes tipográficas.</p>
+<p>El logo es el general UCM incluido en <code>repo-web/assets/ucm-logo.png</code>. No es el de la FDI, no se recolorea con los temas y no se descarga de otra web durante la edición. El crédito de la Oficina se conserva literalmente. La estética se inspira en la distribución de la captura proporcionada y en un entorno de trabajo sobrio; no incorpora código ni activos de Lichess.</p>
+<h2 id="instalacion-3-apariencia-y-accesibilidad">3. Apariencia y accesibilidad</h2>
+<p>Pulsa <strong>Apariencia</strong>. La primera apertura utiliza <strong>UCM · claro</strong>, con el rojo #B71234, blanco y grises. Hay seis temas: UCM claro, UCM oscuro, Tablero claro, Tablero oscuro, Papel sepia y Alto contraste.</p>
+<p>Puedes ajustar fondo, paneles, texto y acento; tamaño de interfaz entre 14 y 24 px; código entre 16 y 40 px; lectura entre 16 y 30 px; interlineado; anchura del lateral y reparto entre código y vista. La opción <strong>Controles amplios de 44 px</strong> facilita pulsarlos. <strong>Ajustar líneas largas</strong> elimina la capa de colores y el margen numerado para evitar desalineaciones con el texto envuelto.</p>
+<p>El diálogo muestra la relación de contraste texto/panel. Los colores derivados de texto y enlaces se corrigen para no desaparecer sobre su fondo. Cambiar el tema solo cambia la interfaz: no modifica los colores de tus fuentes LaTeX, del PDF generado ni del logo.</p>
+<p><strong>Guardar apariencia</strong> la recuerda en este navegador; Cancelar o Escape restaura el aspecto anterior. Puedes exportar e importar un JSON de preferencias sin documentos ni credenciales. El botón <strong>Restablecer UCM claro</strong> recupera la base y después puedes guardarla.</p>
+<p>Los controles tienen etiquetas, foco visible y navegación por teclado. El botón <strong>Más espacio</strong> oculta elementos secundarios. Los temas han pasado comprobaciones numéricas de pares de contraste y pruebas de distribución entre 390 y 1920 px. Esto no equivale a una auditoría completa WCAG, de lectores de pantalla o de cada combinación personalizada. La ampliación del navegador sigue disponible; prueba también tu magnificador y lector habituales.</p>
+<h2 id="instalacion-4-crear-y-escribir-markdown">4. Crear y escribir Markdown</h2>
+<p>Pulsa <strong>Nuevo proyecto</strong>, escribe un identificador y un título, y elige <strong>Markdown · cuaderno académico</strong>. Se crea <code>documento.md</code> como archivo principal y <code>markdown</code> como motor. Para explorar antes de crear, pulsa <strong>Probar Markdown</strong>.</p>
+<p>Puedes tener <code>.tex</code>, <code>.bib</code>, imágenes y <code>.md</code> dentro de un mismo proyecto. La vista sigue el archivo abierto; el motor se asocia al principal. Al escoger un principal Markdown se configura el modo Markdown, y al escoger un <code>.tex</code> vuelves al motor LaTeX. El índice de la izquierda se construye con los encabezados del archivo Markdown.</p>
+<p>La lectura se actualiza localmente mientras escribes, sin lanzar Actions. Admite encabezados, párrafos, enlaces HTTP(S)/correo, listas anidadas, tareas, tablas, citas en bloque, negrita, cursiva, tachado y bloques de código. Las imágenes admitidas son PNG, JPEG, GIF y WebP que ya estén dentro del proyecto y referenciadas por una ruta local. Las imágenes externas no se descargan automáticamente.</p>
+<p><strong>Descargar .md</strong> conserva el texto fuente. <strong>Exportar HTML</strong> crea una página autónoma, sin JavaScript ni token, con estilo de lectura e imágenes locales incorporadas. <strong>Imprimir / PDF</strong> utiliza la impresión de tu navegador: comprueba el resultado antes de distribuirlo. Guardar ZIP o guardar en GitHub incluye también tus archivos Markdown.</p>
+<h3 id="instalacion-que-no-hace-este-modo">Qué no hace este modo</h3>
+<p>No convierte Markdown en un PDF mediante Pandoc/Actions. No resuelve fórmulas matemáticas, diagramas Mermaid, front matter editorial ni citas Pandoc <code>[@clave]</code> en la vista. El gestor bibliográfico puede insertar esa clave para un flujo posterior, pero no fabrica una bibliografía renderizada. Para composición tipográfica y referencias resueltas utiliza el modo LaTeX/XeLaTeX con Biber.</p>
+<p>El HTML incrustado se muestra como texto: no ejecuta scripts, formularios, iframes ni SVG. La vista está limitada a 200 000 caracteres y el trabajador se detiene tras dos segundos de análisis; el archivo sigue disponible para editar o exportar. El renderizador incluido es un snapshot identificado de <strong>Marked 4.0.19</strong>, no la versión más reciente: consulta su licencia y las notas de mantenimiento en <code>repo-web/vendor/</code>. Las restricciones de salida y de tiempo son parte de esta implementación; no son una certificación general del parser.</p>
+<h2 id="instalacion-5-guardar-y-forzar-guardado">5. Guardar y forzar guardado</h2>
+<table>
+<thead>
+<tr>
+<th>Situación</th>
+<th>Guardar</th>
+<th>Forzar guardado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No has conectado GitHub</td>
+<td>Descarga un ZIP con el proyecto actual</td>
+<td>Descarga el ZIP inmediatamente; no simula una subida</td>
+</tr>
+<tr>
+<td>GitHub conectado, cambios compatibles</td>
+<td>Combina y guarda una nueva revisión</td>
+<td>Lee la revisión más reciente y muestra qué se guardará</td>
+</tr>
+<tr>
+<td>Cambios incompatibles entre autores</td>
+<td>Detiene el guardado y ofrece resolver</td>
+<td>Permite conservar tu versión de los archivos incompatibles después de confirmarlo</td>
+</tr>
+<tr>
+<td>Solo tienes permiso de lectura</td>
+<td>No escribe</td>
+<td>No elude los permisos; está desactivado</td>
+</tr>
+</tbody>
+</table>
+<p>En <strong>Forzar guardado</strong>, el diálogo identifica repositorio, proyecto, revisión y archivos afectados. Si tu versión va a sustituir cambios incompatibles, debes escribir <strong>GUARDAR</strong>. Puedes descargar tanto tu copia como la de GitHub; antes de aplicar una sustitución incompatible se inicia además la descarga de una copia ZIP de tu edición. Comprueba que tu navegador acepta esa descarga.</p>
+<p>La operación crea un commit descendiente normal. <strong>No utiliza force-push ni borra el historial</strong>. La versión sustituida sigue recuperable en GitHub; los cambios compatibles y los archivos remotos independientes se conservan. No modifica proyectos ajenos ni workflows fuera de la carpeta seleccionada.</p>
+<p>Si alguien guarda después de que hayas abierto la revisión de confirmación, se cancela la escritura y aparece un mensaje dentro del diálogo. Ciérralo y pulsa Forzar guardado otra vez para revisar la nueva situación. No se reintenta una sobrescritura automáticamente.</p>
+<p>Atajos: <strong>Ctrl+S</strong> guarda o exporta; <strong>Ctrl+Shift+S</strong> abre el guardado forzado o exporta localmente; <strong>Ctrl+Enter</strong>, desde el editor, compila el principal o actualiza la vista Markdown. Los atajos no interceptan los diálogos abiertos ni el chat. El guardado automático de GitHub sigue siendo opcional y no compila por su cuenta.</p>
+<h2 id="instalacion-6-instalar-desde-cero-en-github">6. Instalar desde cero en GitHub</h2>
+<p>Comprueba que tienes Python, Git y GitHub CLI (<code>gh</code>):</p>
+<pre><code class="language-powershell">python --version
+git --version
+gh --version
+</code></pre>
+<p>Inicia sesión con tu usuario. Las credenciales no se pegan en archivos del paquete:</p>
+<pre><code class="language-powershell">gh auth login --hostname github.com --git-protocol https --web
+gh auth setup-git
+gh auth refresh -h github.com -s workflow
+</code></pre>
+<p>Desde la carpeta raíz del paquete, revisa primero el plan:</p>
+<pre><code class="language-powershell">python tools/publicar.py --owner Blai3ePascal
+</code></pre>
+<p>Esta orden no crea nada. Después ejecuta:</p>
+<pre><code class="language-powershell">python tools/publicar.py --owner Blai3ePascal --execute
+</code></pre>
+<p>Pide escribir <strong>CREAR</strong>. Publica <code>repo-web/</code> como repositorio público <code>aulatex-ucm</code> y <code>repo-proyectos/</code> como repositorio privado <code>aulatex-proyectos</code>. No sobrescribe nombres existentes. Comprueba en Actions el despliegue de Pages. Si falta activarlo manualmente: <strong>Settings → Pages → Source: GitHub Actions</strong>; después ejecuta el workflow de Pages.</p>
+<p>La dirección prevista, solo una vez terminado correctamente ese despliegue, es <code>https://Blai3ePascal.github.io/aulatex-ucm/</code>. No está creada por descargar el ZIP.</p>
+<p>Puedes sustituir el propietario por una organización donde tengas permisos y usar <code>--web</code> y <code>--workspace</code> para otros nombres. Para cada grupo con permisos distintos, crea otro repositorio de documentos, no una carpeta supuestamente privada dentro del mismo repositorio. La web puede reutilizarse.</p>
+<h2 id="instalacion-7-conectar-compartir-y-compilar">7. Conectar, compartir y compilar</h2>
+<p>En <strong>Conectar GitHub</strong>, cada persona introduce su propio token. Para propietarios y miembros autorizados, configura un token fine-grained limitado al repositorio de documentos: Contents y Actions para guardar/compilar, Issues para chat y comentarios. La gestión de colaboradores necesita permisos administrativos adicionales; no los concedas a todo el grupo. El token se mantiene en memoria y se retira del campo tras comprobarlo.</p>
+<p>Los colaboradores externos tienen limitaciones específicas en los tokens fine-grained. Consulta <code>docs/INSTALACION-AVANZADA.md</code> y la documentación oficial indicada allí antes de elegir el tipo de token o repartir accesos. No compartas tu token ni lo publiques en GitHub. Los roles reales de lectura y escritura corresponden a GitHub; un enlace de «lectura» no crea un permiso por sí solo. Una organización permite separar mejor esos roles; un repositorio compartido da acceso a todos sus proyectos e historial.</p>
+<p><strong>Chat</strong> se basa en Issues, no en un servidor de conversación ni en IA. Activa Issues y utiliza el permiso correspondiente. La actualización aproximada es cada 30 segundos mientras el panel es visible, más el botón Actualizar. Todos los participantes con acceso al repositorio pueden leerlo.</p>
+<p><strong>Bibliografía</strong> conserva la importación BibTeX/BibLaTeX, RIS y CSL JSON, el capturador de metadatos y las consultas mediante Actions. Importa, revisa y después incorpora las fichas. No es una sincronización completa con Zotero ni reconoce todas las webs.</p>
+<p>La configuración LaTeX conserva XeLaTeX, pdfLaTeX, LuaLaTeX y Biber. Antes de usar documentos importantes, ejecuta en el repositorio privado <strong>Actualizar y verificar TeX Live</strong> y la comprobación en nube:</p>
+<pre><code class="language-powershell">python tools/verificar_nube.py --owner Blai3ePascal --execute
+</code></pre>
+<p>La referencia heredada del compilador está fijada por digest y declara TeX Live 2026. No se presenta como la imagen más reciente ni como ejecutada aquí. Las compilaciones locales de pruebas utilizan la instalación indicada en sus informes. Pages no publica los documentos privados; los PDF permanecen en el repositorio de documentos y se recuperan con los permisos correspondientes.</p>
+<h2 id="instalacion-8-comprobacion-final-en-tu-equipo">8. Comprobación final en tu equipo</h2>
+<p>Prueba primero un proyecto vacío o el de bienvenida: cambia el tema; crea un Markdown, guarda ZIP, exporta HTML y vuelve a abrirlo; conecta un repositorio de prueba, guarda un <code>.tex</code> y compílalo; abre dos sesiones de cuentas distintas y comprueba el guardado normal y el forzado; verifica también una cuenta lectora y el chat. No migres aún material importante si alguna de esas comprobaciones falla.</p>
+<p>Los informes locales están en <code>docs/PRUEBAS.md</code> y <code>evidencias/v5/</code>. Las pruebas de navegador usan una API GitHub simulada y un transporte de Worker simulado; la navegación HTTP de Chromium estaba bloqueada en el entorno de construcción. El servicio HTTP local sí se comprobó con un cliente Python. Quedan pendientes la autenticación/CORS real, la carga de módulos y Worker bajo CSP en tu navegador, invitaciones, despliegue Pages, APIs bibliográficas reales y la imagen Docker de Actions. No se ha realizado una auditoría integral de seguridad ni de accesibilidad.</p>
+<p>Los editores con permiso de escritura del repositorio pueden modificar sus workflows por otras vías: no equivale a un servicio multiusuario resistente a colaboradores maliciosos. Usa repositorios separados, permisos mínimos y revisión del código. Actions sigue sujeto a las cuotas y políticas de tu cuenta.</p>
+</section><section class="chapter" id="bibliografia"><h2>Bibliografía: traer, revisar y citar</h2><h2 id="bibliografia-tres-entradas-una-biblioteca-editable">Tres entradas, una biblioteca editable</h2>
+<p><strong>Bibliografía</strong> abre el gestor. El archivo <code>.bib</code> de tu proyecto sigue siendo la fuente de verdad: puedes editarlo fuera del gestor o exportarlo con el ZIP. No hay una base de datos opaca ni una cuenta adicional obligatoria.</p>
+<h3 id="bibliografia-desde-zotero-o-una-exportacion-de-una-web">Desde Zotero o una exportación de una web</h3>
+<p>Selecciona las referencias o la colección en Zotero, exporta a <strong>BibLaTeX, BibTeX, RIS o CSL JSON</strong>, y abre el archivo en el gestor. También puedes pegar esos datos en el cuadro y pulsar <strong>Revisar importación</strong>. No se conecta a tu cuenta Zotero, no sube tu biblioteca a un proveedor adicional y no importa automáticamente notas, adjuntos o PDF.</p>
+<p>Revisa título, autores, año, revista/editorial, DOI y tipo. Cada ficha tiene <strong>Revisar / editar ficha</strong>: permite corregir el BibTeX que se añadirá. Selecciona las fichas y el archivo de destino —por defecto <code>references.bib</code>— y pulsa <strong>Añadir seleccionadas al proyecto</strong>. El cuadro de confirmación indica qué se añadirá, qué duplicados se omitirán y cuántas claves se renombrarán. Después guarda en GitHub.</p>
+<p>El importador omite duplicados por DOI, o por coincidencia normalizada de título, autores y año. No detecta todas las equivalencias semánticas: dos versiones del mismo artículo o datos incompletos pueden requerir revisión. Una clave repetida para una referencia distinta se renombra con <code>_2</code>, <code>_3</code>, etc.; no se reemplaza silenciosamente la referencia existente.</p>
+<h3 id="bibliografia-capturar-una-pagina-que-tienes-abierta">Capturar una página que tienes abierta</h3>
+<p>El paquete contiene <code>capturador/</code>, una extensión Manifest V3 para carga local en Chrome/Edge. En el editor, <strong>Capturar una página abierta</strong> lleva a sus instrucciones y al ZIP de la extensión.</p>
+<p>Abre <code>chrome://extensions</code> o <code>edge://extensions</code>, activa <strong>Modo de desarrollador</strong>, elige <strong>Cargar descomprimida</strong> y selecciona la carpeta que contiene <code>manifest.json</code>. Fija la extensión. En la página del artículo pulsa su icono y después <strong>Capturar esta página</strong>. Revisa lo encontrado y pulsa <strong>Copiar para AulaTeX</strong> o <strong>Guardar JSON</strong>. En AulaTeX, pega o abre ese JSON y revisa antes de añadirlo.</p>
+<p>Solo se ejecuta al pulsar, con permisos <code>activeTab</code>, <code>scripting</code> y portapapeles. No tiene un token GitHub, un servicio de fondo ni permiso permanente para todas las webs. Lee el DOM de la página abierta, no las cookies. Si tu sesión da acceso a una página privada, el DOM puede incluir sus metadatos: revisa lo que vas a compartir.</p>
+<p>Los detectores genéricos reconocen Highwire (<code>citation_*</code>), Dublin Core, JSON-LD y COinS. Una página puede describir varias referencias, además de recomendaciones: selecciona la correcta. Sin metadatos reconocibles se crea una ficha básica de título y URL con aviso, sin inventar autores.</p>
+<p><strong>No equivale al motor completo de Zotero.</strong> No se han incorporado sus traductores específicos ni se garantiza capturar todas las webs. No sortea muros de pago, no extrae el contenido de todos los visores PDF, no recorre iframes de otros dominios ni evade medidas anti-extracción. Zotero Connector y la exportación BibTeX/RIS siguen siendo una alternativa para los sitios que este capturador no reconoce. No está publicada ni firmada en las tiendas.</p>
+<h3 id="bibliografia-por-doi-arxiv-pmid-isbn-o-url">Por DOI, arXiv, PMID, ISBN o URL</h3>
+<p>Con el repositorio conectado, despliega <strong>Resolver DOI, arXiv, PMID, ISBN o URL con Actions</strong>. Escribe una consulta por línea, hasta 20:</p>
+<pre><code class="language-text">10.1038/nphys1170
+arxiv:1706.03762
+pmid:31452104
+isbn:9780306406157
+https://www.ejemplo.org/pagina-de-la-publicacion
+</code></pre>
+<p>La última dirección es ilustrativa; sustitúyela por una página real. Al confirmar, la aplicación solicita <code>importar-bibliografia.yml</code>. El recuperador consulta Crossref/DataCite para DOI, arXiv, PubMed o Open Library, o lee metadatos HTML de una página pública. No ejecuta JavaScript de la web. Por eso las páginas que dependen de JavaScript pueden funcionar mejor con la extensión que con Actions.</p>
+<p><strong>Consultar resultado</strong> recupera las fichas para revisión, no las incorpora automáticamente. El identificador de solicitud permite volver más tarde. El resultado se conserva en la rama <code>aulatex-imports</code>, dentro del repositorio de documentos, nunca en Pages. Copia ese identificador antes de cerrar la pestaña; el estado de la solicitud no se guarda como una credencial local.</p>
+<p>Las fuentes bibliográficas son sitios externos que se consultan, no infraestructura donde se aloja AulaTeX. El editor, los datos, el chat y las compilaciones siguen funcionando con GitHub. No se requiere Zotero Server, Firebase, una API de traducción alojada por nosotros ni un proxy de terceros.</p>
+<p>El endpoint público puede cambiar, estar caído, responder 403/429 o no contener la ficha. No se prueba acceso a todas las editoriales. Se conserva un error por consulta y las referencias que sí se recuperan; revisa siempre la correspondencia entre la ficha y la publicación. Una ejecución interrumpida o agotada puede no publicar resultado: revisa Actions y vuelve a solicitar solo las consultas necesarias.</p>
+<h2 id="bibliografia-citar-y-preparar-el-pdf">Citar y preparar el PDF</h2>
+<p>Busca una referencia por título, autor, clave o DOI. Con un <code>.tex</code> abierto, sitúa primero el cursor en el texto, abre el gestor y pulsa <strong>Citar</strong>. Se inserta <code>\cite{clave}</code> en el cursor. <strong>Copiar cita</strong> permite insertarla tú; <strong>Abrir .bib</strong> muestra su fuente.</p>
+<p><strong>Preparar bibliografía en el principal</strong> añade <code>biblatex</code> con Biber, <code>\addbibresource{references.bib}</code> y <code>\printbibliography</code>. Permite elegir numérico, autor-año, APA o IEEE para una configuración nueva. No cambia un estilo ya configurado. No convierte a la fuerza un documento basado en <code>natbib</code>, <code>\bibliography</code> o <code>\bibliographystyle</code>; esas plantillas se mantienen y deben configurarse según sus normas.</p>
+<p>Guarda y compila con XeLaTeX, LuaLaTeX o pdfLaTeX. <code>latexmk</code> ejecuta Biber cuando el documento lo necesita. Importar referencias no demuestra que la revista acepte el estilo generado: revisa las instrucciones de publicación.</p>
+<h2 id="bibliografia-limites-tecnicos-y-seguridad">Límites técnicos y seguridad</h2>
+<p>Máximo 5 MiB y 2000 fichas por importación; la biblioteca muestra las primeras 200 coincidencias y permite filtrar. El parser admite llaves anidadas, comillas, escapes, números y macros <code>@string</code> ya definidas; no promete compatibilidad con todas las extensiones no estándar de BibTeX. Un <code>@preamble</code> se omite con aviso. Las claves de cita se restringen a caracteres seguros. El texto de metadatos JSON/RIS se escapa como LaTeX, y en la interfaz se representa como texto, no HTML.</p>
+<p>Un archivo BibTeX escrito por un usuario puede contener TeX legítimo: no se elimina todo el TeX de ese formato. Compílalo solo en el contenedor restringido y con personas de confianza, igual que el resto de las fuentes. La ruta de destino se valida; no puede escapar del proyecto.</p>
+<p>El recuperador limita tamaño, tiempo y redirecciones. Rechaza URLs con credenciales, puertos no estándar, parámetros con nombres de secretos y hosts locales/internos. Valida direcciones IP públicas y fija la IP comprobada al abrir el socket; vuelve a validar cada redirección. No utiliza cookies, credenciales de GitHub, proxies del entorno ni JavaScript remoto. Las pruebas de estos límites son simuladas; no constituyen una auditoría independiente del sistema.</p>
+<p>Los identificadores/URL de una solicitud forman parte de una ejecución de Actions y de su resultado. No escribas datos privados ni enlaces firmados. En repositorios públicos, tanto las solicitudes como los resultados son públicos. Los resultados de importación no se borran automáticamente: el administrador debe planificar conservación, cuotas y copias de seguridad.</p>
+</section><section class="chapter" id="chat"><h2>Chat y privacidad del equipo</h2><p>Abre <strong>Chat</strong> después de conectar el repositorio. El panel permanece junto al editor y permite seguir escribiendo. Abrirlo solo consulta: la primera persona que envía un mensaje crea la conversación. Los mensajes se almacenan como comentarios de una Issue identificada por el proyecto; no se mantiene un servidor ni un job de Actions esperando mensajes.</p>
+<p><strong>Enviar mensaje</strong> o Ctrl+Enter publica el texto con la identidad real del token de GitHub. <strong>Responder</strong> incluye una mención y una cita breve del mensaje al que contestas. La casilla de contexto añade el archivo y el commit actuales, indicando si hay cambios locales sin guardar. No adjunta automáticamente el contenido completo de un documento.</p>
+<p>Puedes editar o eliminar tus mensajes desde el panel, tras confirmación cuando se eliminan. No se ofrecen controles para modificar los mensajes de otra persona. GitHub conserva su propia autoridad y permisos: un administrador puede tener facultades adicionales desde GitHub. El código no suplanta autores ni atribuye el mensaje a una persona escogida libremente.</p>
+<p><strong>Actualizar</strong> consulta ahora; con el panel y la pestaña visibles consulta aproximadamente cada 30 segundos. La cola de la API, la red, una tarea en curso o un límite de peticiones pueden retrasarlo. No hay indicadores de escritura, voz, vídeo, cursores remotos ni entrega instantánea garantizada. Si la API rechaza una operación, aparece el error; no se anuncia un envío como correcto antes de guardarlo.</p>
+<p>Se cargan los últimos 100–200 mensajes. <strong>Anteriores</strong> recupera páginas anteriores. <strong>Exportar cargados</strong> guarda únicamente los mensajes cargados en un TXT, no promete exportar todo un hilo largo sin recorrerlo. Un identificador de envío permite evitar el duplicado en reintentos inmediatos; no existe una transacción global de mensajería de exactamente una entrega. Una creación inicial simultánea puede dejar una Issue vacía adicional: se selecciona la conversación más antigua identificada, sin borrar automáticamente las otras.</p>
+<h2 id="chat-permisos-y-privacidad">Permisos y privacidad</h2>
+<p>Activa <strong>Settings → General → Features → Issues</strong> en el repositorio. Para escribir desde la aplicación: permiso de escritura del repositorio y permiso <code>Issues: read and write</code> en tu propio token. Un lector de AulaTeX puede consultar el chat pero la interfaz no le permite enviar. Las capacidades que GitHub pueda conceder por otras vías se rigen por GitHub, no por botones ocultos.</p>
+<p>Todos los que accedan al repositorio podrán consultar sus Issues. <strong>No es un mensaje directo ni un canal privado entre dos miembros del mismo repositorio.</strong> En un repositorio público, la conversación es pública. La aplicación pide confirmación adicional antes de publicar en un repositorio público.</p>
+<p>GitHub puede enviar notificaciones por los mensajes y menciones. Eliminar un mensaje no retira correos ni copias que alguien haya guardado. Configura las notificaciones en GitHub según las necesidades del grupo. No publiques secretos ni datos especialmente sensibles en este chat.</p>
+<p>Los mensajes se muestran como texto: no se ejecuta HTML, no se cargan imágenes externas y las etiquetas potencialmente peligrosas se ven literalmente. Los tokens se mantienen en memoria y no se incorporan a mensajes, enlaces, archivos o exportaciones. No hace falta ningún token compartido para toda la clase.</p>
+<p>El identificador del hilo está asociado al repositorio y la carpeta del proyecto. Renombrar/mover la carpeta no migra automáticamente la conversación anterior: su Issue permanece accesible en GitHub.</p>
+</section><section class="chapter" id="pruebas"><h2>Pruebas y aceptación pendiente</h2><p>Entrega de 10 de octubre de 2026. Código y pruebas ejecutados en el entorno local de construcción. <strong>No se ha publicado nada en tu GitHub.</strong> Los resultados siguientes no se deducen de la versión anterior: se han vuelto a ejecutar sobre v5.</p>
+<h2 id="pruebas-resultados">Resultados</h2>
+<table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Resultado</th>
+<th>Alcance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JavaScript / Node</td>
+<td>140 de 140</td>
+<td>97 regresiones de v4 + 43 controles de temas, Markdown y guardado forzado</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>47 de 47</td>
+<td>39 controles heredados + 8 del servidor de vista local</td>
+</tr>
+<tr>
+<td>Chromium, colaboración</td>
+<td>24 de 24</td>
+<td>Tres vías, conflictos, lectura, permisos, historial y dispatch simulado</td>
+</tr>
+<tr>
+<td>Chromium, bibliografía/chat</td>
+<td>35 de 35</td>
+<td>Flujo de importación y conversación de equipo con API simulada</td>
+</tr>
+<tr>
+<td>Chromium, v5</td>
+<td>58 de 58</td>
+<td>Temas, exportaciones, Markdown, tamaños, guardado forzado, carreras y lector</td>
+</tr>
+<tr>
+<td>Capturador de metadatos</td>
+<td>7 de 7</td>
+<td>Fixtures DOM Highwire, Dublin Core, JSON-LD, COinS y fallback</td>
+</tr>
+<tr>
+<td>TeX real local</td>
+<td>12 PDF generados</td>
+<td>Cuatro plantillas × pdfLaTeX, XeLaTeX, LuaLaTeX; 36 páginas con texto</td>
+</tr>
+<tr>
+<td>Error LaTeX intencionado</td>
+<td>Rechazo correcto</td>
+<td>Sin entregar PDF como si la compilación hubiese funcionado</td>
+</tr>
+<tr>
+<td>Markdown → HTML → PDF</td>
+<td>1 PDF real</td>
+<td>Exportación sin scripts e impresión nativa Chromium, A4</td>
+</tr>
+</tbody>
+</table>
+<p>La prueba de HTTP local con cliente Python abre realmente 127.0.0.1: comprueba index, MIME JavaScript del Worker, HEAD, rechazo de POST, recorrido de rutas, directorios y workflows privados. Está incluida en las 47 pruebas Python, no se cuenta otra vez como un bloque independiente de tests.</p>
+<h2 id="pruebas-que-se-verifica-del-guardado-forzado">Qué se verifica del guardado forzado</h2>
+<p>La revisión no escribe por sí sola. Sin conflictos se crea un commit hijo; con archivos incompatibles se exige GUARDAR y se genera una copia ZIP local. Se comprueba la preferencia local autorizada, la conservación de un archivo creado remotamente, la permanencia de la revisión sustituida en la ascendencia y <code>force:false</code> en cada actualización de ref. Si cambia la cabeza entre revisar y confirmar, la API no recibe una publicación de la referencia. Un lector no puede forzar ni guardar desde la interfaz.</p>
+<p>Las pruebas usan un repositorio simulado con blobs, árboles, commits y comprobación de fast-forward. Son pruebas del comportamiento de nuestro código; no son una invitación real ni una operación en tu cuenta.</p>
+<h2 id="pruebas-que-se-verifica-de-markdown-y-la-interfaz">Qué se verifica de Markdown y la interfaz</h2>
+<p>Los módulos reales se ejecutan en Chromium, con una adaptación de carga para el entorno. Se verifican la lectura, índice, listas/tareas/tablas, HTML inerte, enlaces peligrosos bloqueados, imágenes externas no cargadas, salida .md/HTML, ZIP local, proyecto Markdown guardado y reabierto por otro lector, cambios de tema, Cancelar/Escape, JSON de preferencias, ajuste de líneas, texto ampliado, controles de 44 px y distribución sin desbordamiento global entre 390 y 1920 px. Se han inspeccionado visualmente capturas claro/oscuro, personalización, móvil y guardado.</p>
+<p>Los tokens de prueba no aparecen en el almacenamiento persistente simulado. Esto no demuestra que sea imposible un fallo de seguridad: no se ha hecho una auditoría completa ni un análisis de todas las extensiones de navegador que el usuario pueda tener instaladas.</p>
+<h2 id="pruebas-accesibilidad-alcance-exacto">Accesibilidad: alcance exacto</h2>
+<p>Las pruebas numéricas comprueban los pares principales de los seis temas, con objetivo de texto 4.5:1 y delimitadores activos 3:1. La aplicación deriva colores más legibles cuando los valores personalizados los harían desaparecer. El criterio de contraste procede de W3C: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html.</p>
+<p><strong>No se declara conformidad completa WCAG.</strong> No se ha realizado una auditoría de lector de pantalla, magnificadores, zoom real del navegador al 400 %, teclado en todos los diálogos, orientación ni todas las combinaciones arbitrarias de preferencias. Las capturas a distintas anchuras prueban reflujo del DOM a esas anchuras, no equivalen a esas auditorías.</p>
+<h2 id="pruebas-limitaciones-del-entorno-de-pruebas">Limitaciones del entorno de pruebas</h2>
+<p>La política del entorno rechaza la navegación HTTP de Chromium con <code>ERR_BLOCKED_BY_ADMINISTRATOR</code>, incluso a 127.0.0.1. Por eso las pruebas de UI cargan el DOM mediante <code>set_content</code>, incorporan los módulos a un bundle de ensayo y retiran la CSP solo en el harness. La API de GitHub, las fuentes bibliográficas, storage, clipboard, parte de crypto y <strong>el transporte del Worker</strong> se simulan. El parser real se ejecuta para las pruebas funcionales; no se ha validado la carga nativa del Worker por URL bajo la CSP de producción.</p>
+<p>No se ha comprobado autenticación real, CORS, tokens de colaboradores, invitaciones, cuotas, Pages, Actions en tu cuenta, capturas de todas las editoriales o la instalación completa del capturador. No se ha ejecutado la imagen Docker de producción.</p>
+<p>Marked se distribuye como snapshot identificado 4.0.19, no como la versión más reciente. Consulta <code>vendor/MARKED-NOTICE.md</code>; su uso está restringido por los renderizadores de salida, el límite de entrada y el Worker con tiempo máximo. El administrador debe revisar y actualizar dependencias antes de abrir un servicio a terceros. No se ha incluido contenido remoto como código de terceros en tiempo de edición.</p>
+<h2 id="pruebas-entorno-real-de-compilacion">Entorno real de compilación</h2>
+<ul>
+<li>Python: 3.13.5.</li>
+<li>Node: v22.16.0.</li>
+<li>Chromium: 144.0.7559.96.</li>
+<li>XeLaTeX: XeTeX 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian).</li>
+<li>pdfLaTeX: pdfTeX 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian).</li>
+</ul>
+<p>Los <code>build.json</code> contienen también la referencia <strong>objetivo</strong> TeX Live 2026 heredada. El campo <code>execution: local-test-NOT-sandboxed</code> es el que identifica estas ejecuciones: los PDF no se han creado dentro de esa imagen. Nunca utilices <code>--local-test</code> con documentos no confiables.</p>
+<p>Los PDF de compilación son fixtures de las plantillas heredadas, no documentos académicos terminados. Se ha comprobado su estructura y se han revisado las páginas representativas de XeLaTeX. El PDF Markdown adicional se ha renderizado e inspeccionado por separado; no es prueba del diálogo de impresión del sistema operativo del usuario.</p>
+<h2 id="pruebas-repetir-las-comprobaciones">Repetir las comprobaciones</h2>
+<pre><code class="language-bash">node --test tests/*.test.mjs
+python -m unittest discover -s tests -p '*_test.py'
+python tests/browser_v3.py
+python tests/browser_v4.py
+python tests/browser_v5.py
+python tests/static_and_capture.py
+python tests/real_latex.py
+python tests/print_markdown.py
+</code></pre>
+<p>Las pruebas de navegador requieren Playwright y Chromium; las de TeX requieren los motores/paquetes instalados o ejecutar <code>real_latex.py --docker</code> con Docker y acceso a la imagen. No son requisitos para el editor ya publicado. El bundle simulado solo existe en tests; Pages publica los módulos originales. Las guías se regeneran con <code>python tools/build_docs.py</code> (dependencia de mantenimiento: markdown-it-py).</p>
+<h2 id="pruebas-antes-de-utilizar-documentos-importantes">Antes de utilizar documentos importantes</h2>
+<p>Publica primero un repositorio de prueba, comprueba la carga de los módulos y Worker desde Pages, crea/guarda/reabre un Markdown, exporta su HTML y verifica una impresión. Ejecuta el workflow de verificación TeX Live y <code>tools/verificar_nube.py --owner TU_USUARIO --execute</code>. Repite el conflicto entre dos cuentas y una apertura con lectura. Solo después migra los trabajos.</p>
+<p>El manifiesto SHA-256 permite detectar cambios o pérdidas de archivos en el paquete; <strong>no es una firma digital ni una auditoría</strong>. La marca general UCM incluida tiene SHA-256 <code>1ece63934438987ed640f125b919da97b7cba4772782b0b5b0ba33600c80265c</code>. No se distribuyen archivos de fuentes tipográficas.</p>
+</section><section class="chapter" id="procedencia"><h2>Procedencia, crédito y cambios</h2><p><strong>Fork creado por la Oficina de Software Libre y Tecnologías Abiertas</strong></p>
+<p>AulaTeX v5 deriva de AulaTeX v4 entregado en esta conversación. No es el servidor de Overleaf Community ni incorpora una base de código de Lichess. La captura proporcionada sirve como referencia de distribución visual, no como fuente de código ni promesa de funciones de IA.</p>
+<p>Se ha sustituido la hoja de estilos por una interfaz de paneles rectos, conservando los controles existentes y el logo general UCM. Se añade apariencia persistente local con seis temas, controles ampliables y JSON de preferencias. El logo mantiene sus bytes y su proporción.</p>
+<p>Markdown se integra como modo de proyecto/archivo con índice, lectura GFM local, exportación .md/HTML e impresión. El núcleo de análisis proviene de Marked 4.0.19 identificado, con licencia MIT conservada. El wrapper UMD se adapta a ES Modules sin cambiar el cuerpo del parser. Sus renderizadores de HTML, imágenes, enlaces y encabezados se reemplazan; el transporte de producción usa un Worker terminable. No se afirma que ese snapshot sea la versión más reciente.</p>
+<p>Forzar guardado es una operación explícita de contenido, nunca una actualización forzada de referencias Git. Revisa la cabeza, conserva cambios compatibles, prefiere el archivo local solo tras confirmar incompatibilidades, y cancela la escritura si cambia la revisión desde el diálogo.</p>
+<p>Se incluye un lanzador local Python vinculado a 127.0.0.1 para probar la interfaz antes de instalarla. No altera la arquitectura de alojamiento en producción.</p>
+<p>Se conservan bibliografía, capturador, chat, permisos, combinación a tres vías, comentarios e historial. No hay servidor de IA, autocompletado generativo ni coedición carácter a carácter. El capturador de bibliografía sigue siendo la versión v4; no se etiqueta como actualizado sin cambios.</p>
+</section><section class="chapter" id="fuentes"><h2>Fuentes y licencias</h2><p>Consultadas el 10 de octubre de 2026. Algunas páginas se sirven desde instantáneas anteriores; no se deduce de ellas una versión más reciente que la que muestran.</p>
+<ul>
+<li>GitHub Pages, alojamiento estático: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages</li>
+<li>Estructura real del servidor Overleaf: https://github.com/overleaf/overleaf/blob/main/docker-compose.yml (MongoDB, Redis y aplicación persistente). AulaTeX no copia este código ni se presenta como fork de ese servidor. El crédito solicitado se refiere a la derivación de AulaTeX.</li>
+<li>Colaboradores, roles de organización y permiso Administration: https://docs.github.com/en/rest/collaborators/collaborators</li>
+<li>Token fine-grained frente a colaborador externo/classic: https://docs.github.com/en/enterprise-cloud@latest/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens</li>
+<li>Lectura/escritura en repositorios personales: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository</li>
+<li>Permisos base de organizaciones: https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/setting-base-permissions-for-an-organization</li>
+<li>ETags, pausas, sondeo y límites de API: https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api</li>
+<li>Referencias Git y actualización sin force: https://docs.github.com/en/rest/git/refs</li>
+<li>Minutos y almacenamiento de Actions: https://docs.github.com/en/billing/concepts/product-billing/github-actions</li>
+<li>TeX Live: https://tug.org/texlive/</li>
+<li>Mantenedor de la imagen TeX Live completa: https://github.com/xu-cheng/latex-docker</li>
+<li>Registro y referencia verificable 20260401: https://github.com/users/xu-cheng/packages/container/package/texlive-debian
+<ul>
+<li>Linux amd64: sha256:35951023f74597247b06cd6b174e08fddbfb2d9ab4894e7019776659a08c6c6c</li>
+<li>Esta instantánea muestra abril de 2026; no acredita cuál es la etiqueta más reciente de octubre. La referencia de octubre del paquete v1 no se ha reutilizado como dato verificado.</li>
+</ul>
+</li>
+<li>Colores UCM y recursos de marca: https://fundacioncomplutense.es/ecv/recursos/</li>
+<li>Marca general UCM, versiones y uso: https://biblioteca.ucm.es/logos/</li>
+<li>Copia UCM incluida: https://github.com/Grasia/dao-analyzer/blob/master/dao_analyzer/web/assets/logo-ucm.png
+<ul>
+<li>Recuperada del repositorio público GRASIA. PNG original, 189 × 67 píxeles, 7539 bytes, sin redibujar ni recolorear.</li>
+<li>Git blob SHA-1: <code>d18dcb31562fc7acdab8563b83cfb718e00d2f95</code>.</li>
+<li>SHA-256: <code>1ece63934438987ed640f125b919da97b7cba4772782b0b5b0ba33600c80265c</code>.</li>
+<li>Es la marca horizontal general UCM, no el emblema de Informática. Para usos grandes/impresión, sustituir por original institucional de mayor resolución. La titularidad no se transfiere.</li>
+</ul>
+</li>
+<li>Descargas oficiales de marca: https://www.ucm.es/descarga-la-marca-ucm</li>
+</ul>
+<h2 id="fuentes-bibliografia-capturador-y-chat">Bibliografía, capturador y chat</h2>
+<ul>
+<li>Metadatos bibliográficos embebidos y cobertura de traductores Zotero: https://www.zotero.org/support/dev/exposing_metadata</li>
+<li>Formatos de importación y exportación Zotero: https://www.zotero.org/support/kb/importing_standardized_formats y https://www.zotero.org/support/kb/exporting</li>
+<li>Chrome <code>activeTab</code>: https://developer.chrome.com/docs/extensions/develop/concepts/activeTab</li>
+<li>Chrome <code>scripting</code>: https://developer.chrome.com/docs/extensions/reference/api/scripting</li>
+<li>Chrome extensión local: https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world</li>
+<li>Crossref REST API: https://www.crossref.org/documentation/retrieve-metadata/rest-api/</li>
+<li>DataCite API: https://support.datacite.org/docs/api</li>
+<li>arXiv API: https://info.arxiv.org/help/api/user-manual.html</li>
+<li>PubMed/NCBI E-utilities: https://www.ncbi.nlm.nih.gov/books/NBK25499/</li>
+<li>Open Library Books API: https://openlibrary.org/dev/docs/api/books</li>
+<li>Comentarios de Issues y permisos: https://docs.github.com/en/rest/issues/comments</li>
+<li>Issues: https://docs.github.com/en/rest/issues/issues</li>
+<li>Bibliografía de ejemplo: Donald E. Knuth, <em>The TeXbook</em>, Addison-Wesley, 1984. La ficha CSL JSON de prueba se incluye con el código que la convierte; no se atribuye a una consulta remota realizada en Actions.</li>
+</ul>
+<p>Los endpoints y estándares se contrastaron con sus documentos primarios. Las consultas realizadas por los scripts de AulaTeX se han probado mediante respuestas controladas, no como barrido de las editoriales reales. No se incorpora código ni traducción de sitios específica de Zotero. Crossref, DataCite, arXiv, PubMed y Open Library son fuentes consultadas voluntariamente por el importador, no servidores donde se aloja la aplicación.</p>
+<h2 id="fuentes-dependencias-que-si-van-en-el-paquete">Dependencias que sí van en el paquete</h2>
+<ul>
+<li>JSZip 3.10.1, licencia propia conservada en <code>repo-web/vendor/JSZIP-LICENSE.md</code>.</li>
+<li>jsdiff 5.2.0, BSD-3-Clause, licencia conservada en <code>repo-web/vendor/JSDIFF-LICENSE.txt</code>.</li>
+<li>Código independiente de AulaTeX, MIT; no está derivado del servidor Overleaf Community.</li>
+</ul>
+<p>No se distribuyen archivos de fuentes tipográficas ni la distribución TeX Live. Las imágenes Docker se obtienen en GitHub Actions del registro configurado, con sus respectivas licencias. Los logos y nombres institucionales están excluidos de la licencia MIT.</p>
+<h2 id="fuentes-v5-markdown-y-accesibilidad">v5: Markdown y accesibilidad</h2>
+<ul>
+<li>W3C, contraste mínimo WCAG 2.2: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html (consultado 10-10-2026). Objetivo de pares 4.5:1; no certificación integral.</li>
+<li>Marked, arquitectura, advertencias de HTML y Worker: https://marked.js.org/using_advanced (consultado 10-10-2026). Implementación empaquetada: snapshot identificado 4.0.19; no se afirma actualidad de esa dependencia.</li>
+<li>Copia y origen local de Marked: vendor/MARKED-NOTICE.md y MARKED-LICENSE.md.</li>
+<li>Referencia visual: captura facilitada por el usuario. Paletas Tablero de diseño propio, inspiradas en un escritorio sobrio; no activos ni código de Lichess.</li>
+</ul>
+</section></main><footer>Fork creado por la Oficina de Software Libre y Tecnologías Abiertas<br>Código AulaTeX independiente de Overleaf Community. Marca UCM excluida de la licencia del código. No se distribuyen fuentes tipográficas.</footer></body></html>
